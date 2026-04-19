@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Define a base path corretamente
+RewriteBase /Elid%20System/ElidImobi/
+
+# Pula se for arquivo ou diretório real
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Roteia tudo para index.php preservando a query string
+RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+# Se mod_rewrite não estiver disponível, tenta outras opções
+<IfModule !mod_rewrite.c>
+    DirectoryIndex index.php index.html
+</IfModule>
+
+# Configurações para JavaScript modules
+<IfModule mod_mime.c>
+    AddType text/javascript .js
+    AddType application/javascript .js
+</IfModule>

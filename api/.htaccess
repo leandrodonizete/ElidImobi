@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /Elid%20System/ElidImobi/api/
+
+# Se for arquivo ou diretório real, serve normalmente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Roteia tudo para index.php
+RewriteRule ^(.*)$ index.php?request=$1 [L,QSA]
+</IfModule>

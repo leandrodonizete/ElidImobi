@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste de API</title>
+</head>
+<body>
+    <h2>Teste de Requisição de API</h2>
+    <pre id="output"></pre>
+    <button onclick="testApi()">Testar /api/auth/login</button>
+
+    <script>
+        async function testApi() {
+            const output = document.getElementById('output');
+            
+            // Detecta o base path como o JavaScript faz
+            const pathname = window.location.pathname;
+            const basePath = pathname.substring(0, pathname.lastIndexOf('/')) || '/';
+            const apiBase = basePath + '/api';
+            
+            output.textContent = 'Configuração:\n';
+            output.textContent += `pathname: ${pathname}\n`;
+            output.textContent += `basePath: ${basePath}\n`;
+            output.textContent += `apiBase: ${apiBase}\n`;
+            output.textContent += `URL será: ${apiBase}/auth/login\n\n`;
+            
+            try {
+                const url = apiBase + '/auth/login';
+                output.textContent += `Enviando POST para: ${url}\n\n`;
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: 'leandro@leandro.com', senha: '123' })
+                });
+                
+                output.textContent += `Status: ${response.status} ${response.statusText}\n`;
+                
+                const text = await response.text();
+                output.textContent += `Response:\n${text}\n`;
+            } catch (error) {
+                output.textContent += `Erro: ${error.message}\n`;
+            }
+        }
+
+        // Auto-test on load
+        testApi();
+    </script>
+</body>
+</html>

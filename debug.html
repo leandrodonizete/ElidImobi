@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug</title>
+</head>
+<body>
+    <h1>Test Start</h1>
+    <div id="output"></div>
+    
+    <script>
+        document.getElementById('output').innerHTML = 'Script 1 loaded<br>';
+    </script>
+    
+    <script src="./src/app-no-modules.js"></script>
+    
+    <script>
+        setTimeout(() => {
+            if (document.getElementById('app').innerHTML === '') {
+                document.getElementById('output').innerHTML += 'App is empty - JavaScript may have failed<br>';
+            } else {
+                document.getElementById('output').innerHTML += 'App loaded content successfully<br>';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
